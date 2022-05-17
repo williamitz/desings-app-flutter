@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
-      initialRoute: '',
+      initialRoute: 'slider',
       routes: {
         '': (_) => const HomeScreen(),
         'slider': (_) => const SliderScreen(),

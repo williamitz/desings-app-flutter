@@ -12,20 +12,20 @@ class ButtonRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: const [
-          _customButton(icon: Icons.phone, text: 'CALL', ),
-          _customButton(icon: Icons.send, text: 'ROUTE', ),
-          _customButton(icon: Icons.share, text: 'SHARE', ),
+          _CustomButton(icon: Icons.phone, text: 'CALL', ),
+          _CustomButton(icon: Icons.send, text: 'ROUTE', ),
+          _CustomButton(icon: Icons.share, text: 'SHARE', ),
         ],
       ),
     );
   }
 }
 
-class _customButton extends StatelessWidget {
+class _CustomButton extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const _customButton({
+  const _CustomButton({
     Key? key,
     required this.icon, 
     required this.text,
