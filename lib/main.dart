@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
         'slider': (_) => const SliderScreen(),
         'blur': (_) => const BlurScreen()
       },
+
+      theme: ThemeData.dark(),
     );
   }
 }

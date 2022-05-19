@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class CardTable extends StatelessWidget {
@@ -6,7 +8,7 @@ class CardTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Table(
-      children: [
+      children: const [
         TableRow(children: [
           _ItemTable(
             title: 'General', 
@@ -48,6 +50,20 @@ class CardTable extends StatelessWidget {
             color: Colors.indigoAccent,
           ),
         ]),
+
+        TableRow(children: [
+          _ItemTable(
+            title: 'Sports', 
+            icon: Icons.directions_bike_outlined, 
+            color: Colors.amber,
+          ),
+
+          _ItemTable(
+            title: 'Pets', 
+            icon: Icons.pets_outlined, 
+            color: Colors.brown,
+          ),
+        ]),
         
       ],
     );
@@ -55,16 +71,12 @@ class CardTable extends StatelessWidget {
 }
 
 class _ItemTable extends StatelessWidget {
-  final boxDecoration = BoxDecoration(
-    borderRadius: BorderRadius.circular(20.0),
-    color: const Color.fromRGBO(62, 66, 107, 0.7),
-  );
 
   final String title;
   final IconData icon;
   final Color color;
 
-  _ItemTable({
+  const _ItemTable({
     Key? key,
     required this.title,
     required this.icon,
@@ -73,28 +85,60 @@ class _ItemTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Widget column = Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          CircleAvatar(
+          backgroundColor: color,
+          child: Icon(icon, size: 35, color: Colors.white),
+          radius: 30,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Text(
+          title,
+          style: TextStyle(color: color, fontSize: 18),
+        )
+      ],
+    );
+    return _CardBackgound(child: column);
+  }
+}
+
+class _CardBackgound extends StatelessWidget {
+
+  final boxDecoration = BoxDecoration(
+    borderRadius: BorderRadius.circular(20.0),
+    color:  const Color.fromRGBO(62, 66, 107, 0.7),
+  );
+
+   _CardBackgound({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(15.0),
-      // width: 40,
-      height: 180,
-      decoration: boxDecoration,
-
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-           CircleAvatar(
-            backgroundColor: color,
-            child: Icon(icon, size: 35, color: Colors.white),
-            radius: 30,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20.0),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 5.0,
+            sigmaY: 5.0
           ),
-          const SizedBox(
-            height: 20,
+          child: Container(
+            // width: 40,
+            height: 180,
+            decoration: boxDecoration,
+        
+            child: child,
           ),
-          Text(
-            title,
-            style: TextStyle(color: color, fontSize: 18),
-          )
-        ],
+        ),
       ),
     );
   }
